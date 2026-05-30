@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://do6wc5mqx3aca"]
+
+[ext_resource type="Script" uid="uid://dpsy7a8x636d8" path="res://scripts/game_manager.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/Target.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/UI.tscn" id="4"]
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+background_color = Color(0.5, 0.63, 0.86, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+size = Vector3(30, 0.5, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(30, 0.5, 30)
+
+[node name="Main" type="Node3D" unique_id=527079326]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=410306025]
+environment = SubResource("Environment_main")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=31829553]
+transform = Transform3D(0.6967067, 0.51459974, -0.4997868, 0, 0.6967067, 0.7173561, 0.7173561, -0.4997868, 0.48540023, 0, 0, 0)
+light_energy = 1.2
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=355951003]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1358444977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1778380563]
+shape = SubResource("BoxShape3D_ground")
+
+[node name="Player" parent="." unique_id=1736739575 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 6)
+
+[node name="Targets" type="Node3D" parent="." unique_id=252581595]
+
+[node name="TargetA" parent="Targets" unique_id=396989500 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.6, -8)
+
+[node name="TargetB" parent="Targets" unique_id=259426927 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -10)
+
+[node name="TargetC" parent="Targets" unique_id=556115582 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, -111.28679)
+
+[node name="UI" parent="." unique_id=672116066 instance=ExtResource("4")]

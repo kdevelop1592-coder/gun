@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://player_scene"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Gun.tscn" id="2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.35
+height = 1.0
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1")
+position = Vector3(0, 1.4, 6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+
+[node name="Gun" parent="Camera3D" instance=ExtResource("2")]
+
+[node name="ShotCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShotCooldownTimer" to="." method="_on_shot_cooldown_timer_timeout"]
