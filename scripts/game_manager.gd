@@ -8,7 +8,7 @@ var shots_hit: int = 0
 var time_left: float = 0.0
 var is_running: bool = false
 
-@onready var ui_manager: CanvasLayer = $UI
+@onready var ui_manager: Node = $UI
 @onready var targets_root: Node3D = $Targets
 
 func _ready() -> void:
@@ -55,8 +55,11 @@ func on_restart_requested() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	start_round()
 
+func set_reload_message_visible(visible: bool) -> void:
+	if ui_manager != null and ui_manager.has_method("set_reload_message_visible"):
+		ui_manager.set_reload_message_visible(visible)
+
 func _reset_targets() -> void:
 	for child in targets_root.get_children():
 		if child.has_method("reset_target"):
 			child.reset_target()
-

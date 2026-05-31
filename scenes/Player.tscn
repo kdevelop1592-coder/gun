@@ -22,4 +22,8 @@ current = true
 [node name="ShotCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="ShotCooldownTimer" to="." method="_on_shot_cooldown_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

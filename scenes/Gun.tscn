@@ -1,20 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://gun_scene"]
+[gd_scene format=3 uid="uid://b7hpx33pioj3s"]
 
-[ext_resource type="Script" path="res://scripts/gun_controller.gd" id="1"]
-[ext_resource type="PackedScene" path="res://public/gun/base_basic_pbr.glb" id="2"]
+[ext_resource type="Script" uid="uid://d3bm3t7ymy0sd" path="res://scripts/gun_controller.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cpqgpwly0fjfo" path="res://public/gun/base_basic_pbr.glb" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/Tracer.tscn" id="3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_muzzle"]
 radius = 0.025
 height = 0.05
 
-[node name="Gun" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
+albedo_color = Color(0.1, 1, 0.2, 1)
+emission_enabled = true
+emission = Color(0.1, 1, 0.2, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_debug"]
+radius = 0.055
+height = 0.11
+
+[node name="Gun" type="Node3D" unique_id=1584373342]
+transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0.24, -0.28, -0.62)
 script = ExtResource("1")
-position = Vector3(0.35, -0.22, -0.55)
-rotation = Vector3(0, 3.14159, 0)
+tracer_scene = ExtResource("3")
 
-[node name="GunModel" parent="." instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="GunModel" parent="." unique_id=1917971658 instance=ExtResource("2")]
+transform = Transform3D(0.5180522, 0.027682357, -0.18263432, -0.06643563, 0.5353234, -0.10730859, 0.17235966, 0.12313611, 0.50757235, -0.005011052, -0.118604004, -0.3992202)
 
-[node name="MuzzleFlash" type="MeshInstance3D" parent="."]
+[node name="MuzzleFlash" type="MeshInstance3D" parent="." unique_id=459418820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -0.45)
 mesh = SubResource("SphereMesh_muzzle")
-position = Vector3(0, 0.04, -0.45)
+
+[node name="MuzzlePoint" type="Marker3D" parent="." unique_id=932930525]
+transform = Transform3D(0.99779683, 0, 0.06634356, 0, 1, 0, -0.06634356, 0, 0.99779683, 0.18887325, 0.112788945, -0.5078708)
+
+[node name="MuzzleDebug" type="MeshInstance3D" parent="MuzzlePoint" unique_id=152727751]
+visible = false
+material_override = SubResource("StandardMaterial3D_debug")
+mesh = SubResource("SphereMesh_debug")

@@ -1,2 +1,8 @@
 res://scenes/Main.tscn
 res://scripts/player_controller.gd
+res://scripts/gun_controller.gd
+res://scenes/Gun.tscn
+res://scripts/target.gd
+res://scripts/game_manager.gd
+res://scenes/UI.tscn
+res://scripts/ui_manager.gd
